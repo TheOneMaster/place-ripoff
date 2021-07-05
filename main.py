@@ -10,18 +10,22 @@ root.resizable(False, False)
 number_of_pixels = 32
 size_of_pixel = 512/32
 
-pixel_grid = ['blue' for i in range(number_of_pixels**2)]
-colors = ['blue', 'red', 'green', 'yellow', 'orange']
 
-for index, color in enumerate(pixel_grid):
+def create_grid(parent, number_of_pixels, pixel_size):
+
+    pixel_grid = [i for i in range(number_of_pixels**2)]
+
+    for i in pixel_grid:
+
+        column = (i % number_of_pixels) * size_of_pixel
+        row = (i // number_of_pixels) * size_of_pixel
+
+        pixel = Pixel(parent, i, (size_of_pixel, size_of_pixel))
+        pixel.place(x=column, y=row)
+
+        i = pixel
     
-    column = (index%number_of_pixels)*16
-    row = (index//number_of_pixels)*16
-
-    pixel = Pixel(root, index, (size_of_pixel, size_of_pixel), color=color)
-    pixel.place(x=column, y=row)
-
-    pixel_grid[index] = pixel
+    return pixel_grid
 
 def reset_all(event):
 
@@ -30,6 +34,8 @@ def reset_all(event):
         i.update_color(new_color="blue")
 
     root.update_idletasks()
+
+pixel_grid = create_grid(root, 32, 16)
 
 root.bind("<space>", reset_all)
 
