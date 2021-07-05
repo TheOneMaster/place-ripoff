@@ -19,21 +19,16 @@ class Pixel(Frame):
         self.bind("<B1-Motion>", self.on_hover)
 
     def update_color(self, new_color=None):
+                        
+        if new_color is None:
+            current_index = Pixel.COLORS.index(self.color)
+            new_index = (current_index+1)%5
+            new_color = Pixel.COLORS[new_index]
 
-        global last_pixel
-
-        if self == last_pixel:
-            pass
-        else:        
-            if new_color is None:
-                current_index = Pixel.COLORS.index(self.color)
-                new_index = (current_index+1)%5
-                new_color = Pixel.COLORS[new_index]
-
-            self.color = new_color
-            self.config(background=new_color)
-            # self.update()
-            last_pixel = self
+        self.color = new_color
+        self.config(background=new_color)
+        # self.update()
+        last_pixel = self
 
     def mouse_click(self, input):
 
