@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "qode main.js"
+  },
+  "dependencies": {
+    "@nodegui/nodegui": "^0.30.1"
+  }
+
+}
